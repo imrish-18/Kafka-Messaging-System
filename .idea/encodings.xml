@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/kafka-messaging-poc/domain-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kafka-messaging-poc/email-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kafka-messaging-poc/order-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kafka-messaging-poc/stock-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/micro-services/Inventory-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/micro-services/Payment-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/micro-services/RedisCache/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/micro-services/api-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/micro-services/eureka-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/micro-services/order-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/micro-services/product-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/QuestionService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/QuizService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/micro_yt/ApiGateway/ApiGateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/micro_yt/QuestionService/QuestionService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/micro_yt/QuizService/QuizService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/micro_yt/ServiceRegistry/ServiceRegistry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/src/main/java" charset="UTF-8" />
+  </component>
+</project>

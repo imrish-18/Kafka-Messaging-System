@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/user-service/pom.xml" />
+        <option value="$PROJECT_DIR$/microservices/micro_yt/ApiGateway/ApiGateway/pom.xml" />
+        <option value="$PROJECT_DIR$/microservices/micro_yt/QuizService/QuizService/pom.xml" />
+        <option value="$PROJECT_DIR$/microservices/micro_yt/QuestionService/QuestionService/pom.xml" />
+        <option value="$PROJECT_DIR$/microservices/micro_yt/ServiceRegistry/ServiceRegistry/pom.xml" />
+        <option value="$PROJECT_DIR$/microservices/QuizService/pom.xml" />
+        <option value="$PROJECT_DIR$/microservices/QuestionService/pom.xml" />
+        <option value="$PROJECT_DIR$/order-service/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-services/RedisCache/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-services/api-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-services/order-service/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-services/eureka-service/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-services/Payment-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-services/product-service/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-services/Inventory-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/kafka-messaging-poc/email-service/pom.xml" />
+        <option value="$PROJECT_DIR$/kafka-messaging-poc/order-service/pom.xml" />
+        <option value="$PROJECT_DIR$/kafka-messaging-poc/stock-service/pom.xml" />
+        <option value="$PROJECT_DIR$/kafka-messaging-poc/domain-service/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="corretto-23" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

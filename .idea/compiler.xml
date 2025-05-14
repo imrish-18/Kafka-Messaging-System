@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eureka-service" />
+        <module name="Inventory-Service" />
+        <module name="Payment-Service" />
+        <module name="api-gateway" />
+        <module name="QuizService" />
+        <module name="ServiceRegistry" />
+        <module name="QuestionService" />
+        <module name="order-service (1)" />
+        <module name="ApiGateway" />
+      </profile>
+      <profile name="Annotation profile for product-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+        </processorPath>
+        <module name="product-service" />
+        <module name="order-service (1) (com.order)" />
+        <module name="RedisCache" />
+      </profile>
+      <profile name="Annotation profile for domain-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="QuizService (1)" />
+        <module name="domain-service" />
+        <module name="QuestionService (1)" />
+        <module name="email-service" />
+        <module name="user-service" />
+        <module name="order-service" />
+      </profile>
+      <profile name="Annotation profile for stock-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="stock-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ApiGateway" options="-parameters" />
+      <module name="Inventory-Service" options="-parameters" />
+      <module name="Payment-Service" options="-parameters" />
+      <module name="QuestionService" options="-parameters" />
+      <module name="QuestionService (1)" options="-parameters" />
+      <module name="QuizService" options="-parameters" />
+      <module name="QuizService (1)" options="-parameters" />
+      <module name="RedisCache" options="-parameters" />
+      <module name="ServiceRegistry" options="-parameters" />
+      <module name="api-gateway" options="-parameters" />
+      <module name="domain-service" options="-parameters" />
+      <module name="email-service" options="-parameters" />
+      <module name="eureka-service" options="-parameters" />
+      <module name="order-service" options="-parameters" />
+      <module name="order-service (1)" options="-parameters" />
+      <module name="order-service (1) (com.order)" options="-parameters" />
+      <module name="product-service" options="-parameters" />
+      <module name="stock-service" options="-parameters" />
+      <module name="user-service" options="-parameters" />
+    </option>
+  </component>
+</project>
