@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/microservices/micro_yt" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/spring-cloud-sleuth-zipkin-example" vcs="Git" />
   </component>
 </project>

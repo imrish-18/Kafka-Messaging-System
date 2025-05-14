@@ -16,17 +16,6 @@
         <module name="order-service (1)" />
         <module name="ApiGateway" />
       </profile>
-      <profile name="Annotation profile for product-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
-        </processorPath>
-        <module name="product-service" />
-        <module name="order-service (1) (com.order)" />
-        <module name="RedisCache" />
-      </profile>
       <profile name="Annotation profile for domain-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -36,10 +25,10 @@
         </processorPath>
         <module name="QuizService (1)" />
         <module name="domain-service" />
-        <module name="QuestionService (1)" />
-        <module name="email-service" />
         <module name="user-service" />
         <module name="order-service" />
+        <module name="QuestionService (1)" />
+        <module name="email-service" />
       </profile>
       <profile name="Annotation profile for stock-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -50,6 +39,17 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
         <module name="stock-service" />
+      </profile>
+      <profile name="Annotation profile for RedisCache" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+        </processorPath>
+        <module name="product-service" />
+        <module name="RedisCache" />
+        <module name="order-service (1) (com.order)" />
       </profile>
     </annotationProcessing>
   </component>
