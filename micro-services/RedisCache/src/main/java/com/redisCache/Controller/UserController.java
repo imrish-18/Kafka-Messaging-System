@@ -3,7 +3,7 @@ package com.redisCache.Controller;
 import com.redisCache.Service.UserService;
 import com.redisCache.model.User;
 import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.tracing.Tracer;
+import io.micrometer.tracing.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

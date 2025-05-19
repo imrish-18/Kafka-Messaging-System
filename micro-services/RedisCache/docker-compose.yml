@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  springboot-app:
+    build:
+      context: .
+#      Tells Docker Compose to build the image using the Dockerfile in the current directory (.).
+      dockerfile: /Users/rishabhsharma/Desktop/Kafka-Messaging-System/micro-services/RedisCache/Dockerfile
+    container_name: redis-mongo-app
+    ports:
+      - "9001:9001"
+    depends_on:
+      - redis
+      - mongodb
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_DATABASE: users
+
+  redis:
+    image: redis:7.2
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

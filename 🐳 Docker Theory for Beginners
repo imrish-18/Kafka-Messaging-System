@@ -1,0 +1,469 @@
+🐳 Docker Theory for Beginners
+🔹 1. What is Docker?
+Docker is an open-source platform that automates the deployment, scaling, and management of applications using containerization.
+
+A container is a lightweight, standalone, executable package that includes everything needed to run a piece of software: code, runtime, libraries, and system tools.
+
+Unlike virtual machines, containers share the host OS kernel, making them more efficient and faster.
+
+🔹 2. Why Use Docker?
+✅ Portability: Run the same container anywhere (local, staging, production).
+
+✅ Efficiency: Lightweight compared to VMs; faster boot times.
+
+✅ Consistency: Eliminates "it works on my machine" issues.
+
+✅ Scalability: Easily scale up/down using orchestrators like Kubernetes.
+
+✅ Isolation: Separate environments for each service.
+
+🔹 3. Key Docker Components
+
+
+| Component            | Description                                                                       |
+| -------------------- | --------------------------------------------------------------------------------- |
+| **Docker Engine**    | Core software that runs and manages containers.                                   |
+| **Docker Image**     | A read-only template used to create containers.                                   |
+| **Docker Container** | A running instance of a Docker image.                                             |
+| **Dockerfile**       | A text file with instructions to build a Docker image.                            |
+| **Docker Hub**       | A public registry to share and download Docker images.                            |
+| **Docker Compose**   | A tool to define and run multi-container applications using `docker-compose.yml`. |
+
+
+🔹 4. Docker Architecture
+Docker uses a client-server architecture:
+
+Docker Client (docker CLI) communicates with
+
+Docker Daemon (dockerd) which manages:
+
+Images
+
+Containers
+
+Networks
+
+Volumes
+
+Client  --->  Docker Daemon  --->  Container Runtime
+
+ 5. Docker Workflow
+Write a Dockerfile to define your app environment.
+
+Build a Docker image from the Dockerfile.
+
+Run a Docker container from the image.
+
+(Optional) Push the image to Docker Hub for sharing.
+
+🔹 6. Basic Dockerfile Example
+# Use base image
+FROM openjdk:17-jdk-slim
+
+# Copy app to container
+COPY ./target/myapp.jar /app.jar
+
+# Define entry point
+CMD ["java", "-jar", "/app.jar"]
+
+🔹 7. Common Docker Commands
+
+
+| Command                             | Description                         |
+| ----------------------------------- | ----------------------------------- |
+| `docker build -t myapp .`           | Builds an image from Dockerfile     |
+| `docker run -p 8080:8080 myapp`     | Runs the container                  |
+| `docker ps`                         | Lists running containers            |
+| `docker stop <container_id>`        | Stops a running container           |
+| `docker exec -it <container_id> sh` | Executes a shell inside a container |
+| `docker images`                     | Lists all images                    |
+| `docker rmi <image_id>`             | Removes an image                    |
+
+
+
+
+🔹 8. Docker Compose (Multi-container setup)
+docker-compose.yml example:
+
+
+version: '3'
+services:
+  web:
+    image: nginx
+    ports:
+      - "80:80"
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+
+run 
+      docker-compose up
+
+🔹 9. Docker vs Virtual Machines
+
+
+
+      | Feature     | Docker Container | Virtual Machine |
+| ----------- | ---------------- | --------------- |
+| Boot time   | Seconds          | Minutes         |
+| Size        | MBs              | GBs             |
+| Isolation   | Process-level    | OS-level        |
+| Performance | Faster           | Slower          |
+
+
+
+🔹 10. Real-World Use Cases
+Microservices architecture
+
+CI/CD pipelines
+
+Testing environments
+
+Platform-as-a-Service (PaaS)
+
+Serverless computing
+
+
+🔹 Detached Mode (-d)
+➤ What it is:
+When you run a container in detached mode, it runs in the background, and you don’t see the output in your terminal.
+
+➤ Command example:
+
+docker run -d nginx
+
+
+➤ Use case:
+Running services or servers (like Nginx, PostgreSQL, etc.)
+
+When you don’t need to interact with the container directly
+
+➤ Key points:
+You get the container ID as a response
+
+To view logs: docker logs <container_id>
+
+To stop: docker stop <container_id>
+
+🔹 Interactive Mode (-it)
+➤ What it is:
+Interactive mode allows you to run a container and interact with it via the terminal — usually useful for debugging, development, or manual commands.
+
+➤ Command example:
+
+docker run -it ubuntu /bin/bash
+
+➤ Use case:
+Manually exploring inside a container
+
+Running one-off tasks
+
+Debugging container behavior
+
+➤ Key points:
+-i keeps STDIN open
+
+-t allocates a pseudo-terminal
+
+You can type commands directly inside the container
+
+
+
+| Feature            | Detached Mode (`-d`) | Interactive Mode (`-it`)   |
+| ------------------ | -------------------- | -------------------------- |
+| Runs in background | ✅ Yes                | ❌ No (runs in foreground)  |
+| Terminal output    | ❌ Hidden             | ✅ Visible                  |
+| User interaction   | ❌ Not possible       | ✅ Fully interactive        |
+| Use case           | Services, daemons    | Debugging, manual commands |
+
+
+Commnads ----->
+after installation  docker 
+just run 
+docker -v 
+docker run hello-world
+docker images to check images
+
+pull the image
+docker pull <image_name> 
+
+docker pull openjdk:<versio>
+
+docker search <imageName>
+to run image 
+docker run  <imageName> or image id 
+docker ps 
+docker ps -a to check all the containers
+
+docker run --evn {varibales name }
+docker run --name <container name> -d <image_id> 
+
+
+docker run --name <containerName> -it -d python 
+
+docker exec  -it(interactive mode ) <container_id> <command> 
+
+docker inspect <container_id> 
+
+docker stop <container_id> 
+docker stop <container_name> 
+docker rm <container_id> ....
+docker rmi <image_name>
+
+docker login ( to login docker hub )
+
+docker commit ( create and save image )
+
+docker push 
+
+docker copy ( from docker to local system)
+docker logs 
+
+docker volume ( to create a volume )
+
+docker logout 
+
+
+
+
+ChatGPT said:
+🐳 What is Docker Compose?
+Docker Compose is a tool that allows you to define and run multi-container Docker applications using a single configuration file (docker-compose.yml).
+
+Instead of running multiple docker build and docker run commands manually, you can manage everything — build, start, stop, and connect containers — with one command.
+
+
+| Feature               | Description                                                                  |
+| --------------------- | ---------------------------------------------------------------------------- |
+| Multi-container setup | Define multiple services in one file (e.g., app + db + cache)                |
+| Networking            | Automatically connects services (e.g., `springboot-app` can talk to `redis`) |
+| One-command startup   | `docker-compose up` starts everything                                        |
+| Environment variables | You can pass env variables to configure services easily                      |
+| Volumes and ports     | Easily define file sharing and port exposure                                 |
+
+
+| Command                     | Purpose                                |
+| --------------------------- | -------------------------------------- |
+| `docker-compose up`         | Start all services                     |
+| `docker-compose up --build` | Build and start all services           |
+| `docker-compose down`       | Stop and remove containers and network |
+| `docker-compose logs`       | View logs for all services             |
+
+
+
+🔚 Summary
+Docker Compose makes it easy to manage complex, multi-container applications — especially useful for:
+
+Microservices
+
+Local development
+
+Testing environments
+
+
+
+| Feature        | `COPY`                         | `ADD`                                  |
+| -------------- | ------------------------------ | -------------------------------------- |
+| Purpose        | Copies files/directories       | Copies files/directories (with extras) |
+| Source         | Local only                     | Local and remote URLs                  |
+| Extra features | ❌ Just copies                  | ✅ Can extract `.tar`, fetch URL        |
+| Recommended    | ✅ Preferred (more predictable) | Use only if you need special features  |
+
+
+| Feature     | `CMD`                                                                        | `ENTRYPOINT`                                                      |
+| ----------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Purpose     | Provides default arguments                                                   | Defines the main command                                          |
+| Overridable | ✅ Overridden by `docker run ...`                                             | 🚫 Cannot be fully overridden                                     |
+| Syntax      | Can be shell (`CMD java -jar...`) or exec form (`CMD ["java", "-jar", ...]`) | Usually used in exec form                                         |
+| Typical use | Define default args (`CMD ["arg1"]`)                                         | Define the actual executable (`ENTRYPOINT ["java", "-jar", ...]`) |
+
+
+
+| Instruction  | Purpose                           | Best Use Case                             |
+| ------------ | --------------------------------- | ----------------------------------------- |
+| `COPY`       | Copy files from host to image     | Most file copying needs                   |
+| `ADD`        | Copy + extract `.tar` or download | Use only if you need those extra features |
+| `CMD`        | Default args to run in container  | Set defaults (overridable at runtime)     |
+| `ENTRYPOINT` | Main command to run in container  | Define the core container behavior        |
+
+
+
+
+Important Note ----->>>
+
+if using spring  boot version > 2.3.1 then no need to write the docker file just run the command
+mvn spring-boot:build-image -Dspring-boot.build-image.imageName=my-redis-cache
+
+✅ 3. Using an .env file
+You can also keep your variables in a .env file:
+
+.env:
+SPRING_PROFILES_ACTIVE=prod
+JAVA_TOOL_OPTIONS=-Xms512m -Xmx1024m
+
+
+docker run --env-file .env -p 8080:8080 my-docker-app
+
+docker run -p 8080:8080 \
+  -e SPRING_PROFILES_ACTIVE=prod \
+  -e JAVA_TOOL_OPTIONS="-Xms512m -Xmx1024m" \
+  my-docker-app
+
+
+  🛠 Using a Dockerfile (More Control)
+🔹 Pros:
+Full control over the base image, runtime, environment.
+
+Useful if you need:
+
+Native OS dependencies
+
+Multi-stage builds
+
+Custom startup logic
+
+🔹 When to use:
+You want to install system packages (e.g., apt install).
+
+You need non-standard configurations.
+
+You're deploying to environments that don’t support buildpacks
+
+
+✅ Using spring-boot:build-image (Recommended for Simplicity)
+🔹 Pros:
+No Dockerfile needed.
+
+Uses Cloud Native Buildpacks.
+
+Automatically detects your JDK, dependencies, etc.
+
+Ideal for clean, convention-based projects.
+
+Produces optimized images (smaller layers, better caching).
+
+
+
+| Scenario                                            | Use                         |
+| --------------------------------------------------- | --------------------------- |
+| Standard Spring Boot project                        | `spring-boot:build-image` ✅ |
+| Need OS-level customizations or multiple containers | `Dockerfile`                |
+| Want to simplify Docker onboarding                  | `spring-boot:build-image` ✅ |
+
+
+
+
+
+-------
+Dockerizing Java Apps using Jib
+
+
+<plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>2.5.0</version>
+                <configuration>
+                    <to>
+                        <image>${image.path}</image>
+                    </to>
+                </configuration>
+            </plugin>
+
+
+For this example, we’ll provide our DockerHub credentials toÂ .m2/settings.xml:
+<servers>
+    <server>
+        <id>registry.hub.docker.com</id>
+        <username><DockerHub Username></username>
+        <password><DockerHub Password></password>
+    </server>
+</servers>
+
+
+
+Deploying to Docker Hub With Jib
+mvn compile com.google.cloud.tools:jib-maven-plugin:2.5.0:build -Dimage=$IMAGE_PATH
+export IMAGE_PATH=registry.hub.docker.com/baeldungjib/spring-jib-app
+
+mvn compile jib:build
+
+
+🚀 What is Jib?
+Jib builds optimized Docker and OCI images for Java applications without a Docker daemon or Dockerfile.
+It uses reproducible builds, layering the app into:
+
+base image (e.g., openjdk)
+
+dependencies
+
+classes
+
+resources
+
+This results in fast rebuilds and smaller image layers.
+
+✅ Why use Jib?
+🔧 No need to write a Dockerfile.
+
+🐳 No need for Docker installed locally (optional).
+
+⚡ Faster rebuilds (layers are cached intelligently).
+
+🧩 Easily integrates with Maven or Gradle.
+
+<build>
+  <plugins>
+    <plugin>
+      <groupId>com.google.cloud.tools</groupId>
+      <artifactId>jib-maven-plugin</artifactId>
+      <version>3.4.1</version> <!-- Use the latest -->
+    </plugin>
+  </plugins>
+</build>
+
+
+
+| Feature              | With Jib            |
+| -------------------- | ------------------- |
+| Dockerfile required  | ❌ No                |
+| Docker daemon needed | ❌ (for `jib:build`) |
+| Fast rebuilds        | ✅ Layered builds    |
+| Easy registry push   | ✅ Yes               |
+| Spring Boot support  | ✅ Fully compatible  |
+
+
+compose.yml
+version: '3.8' //Specifies the Docker Compose file format version. 3.8 is compatible with Docker Engine 19.03+.
+
+services:
+  app:
+    build: .
+    container_name: springboot-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+      - mongodb
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_DATABASE: users
+
+  redis:
+    image: redis:7.2
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+
+
+

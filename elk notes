@@ -1,0 +1,296 @@
+brew tap elastic/tap
+brew install elastic/tap/elasticsearch-full
+elasticsearch
+curl http://localhost:9200
+
+
+brew install elastic/tap/kibana-full
+
+kibana
+
+http://localhost:5601
+
+brew install elastic/tap/logstash-full
+
+input {
+  file {
+    path => "/path/to/elk.log"
+    start_position => "beginning"
+    sincedb_path => "/dev/null"
+  }
+}
+
+filter {
+  grok {
+    match => { "message" => "%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:level} \[%{DATA:app},%{DATA:traceId},%{DATA:spanId}\] %{GREEDYDATA:msg}" }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["http://localhost:9200"]
+    index => "spring-logs-%{+YYYY.MM.dd}"
+  }
+  stdout { codec => rubydebug }
+}
+
+
+logstash -f logstash.conf
+
+
+
+1. Elasticsearch – The Search & Analytics Engine
+What it is: A NoSQL, distributed search engine based on Apache Lucene.
+
+What it does:
+
+Stores logs and data.
+
+Makes it searchable and filterable in real time.
+
+Supports full-text search, aggregations, and filtering.
+
+Example: You send logs from all your services to Elasticsearch, and you can then search:
+
+
+Find all ERROR logs from service-A between 2 PM and 4 PM
+
+
+📥 2. Logstash – The Data Ingestor
+What it is: A data processing pipeline that ingests, transforms, and forwards logs to Elasticsearch.
+
+What it does:
+
+Inputs: Files, TCP, syslog, HTTP, Kafka, etc.
+
+Filters: Parse logs with Grok, convert fields, remove or rename keys.
+
+Outputs: Elasticsearch (or others like S3, Kafka, etc.)
+
+Example: Logstash reads logs from /var/log/app.log, extracts timestamps and levels, and sends structured logs to Elasticsearch.
+
+📊 3. Kibana – The Visualizer
+What it is: A web-based dashboard tool for Elasticsearch.
+
+What it does:
+
+Allows you to search, filter, and visualize logs stored in Elasticsearch.
+
+Build dashboards, charts, and alerts.
+
+Offers time-series exploration, saved queries, and log views.
+
+Example: View a dashboard showing:
+
+Number of errors over time
+
+Logs grouped by service
+
+TraceId flow of a request
+
+🔁 How They Work Together (ELK Flow)
+
+
+Service Logs
+   ↓
+Logstash (input → filter → output)
+   ↓
+Elasticsearch (stores structured log data)
+   ↓
+Kibana (visualizes the logs in a UI)
+
+
+input {
+  file {
+    path => "/path/to/logs/service-A.log"
+    start_position => "beginning"
+    sincedb_path => "/dev/null"
+    type => "service-A"
+  }
+  file {
+    path => "/path/to/logs/service-B.log"
+    start_position => "beginning"
+    sincedb_path => "/dev/null"
+    type => "service-B"
+  }
+  file {
+    path => "/path/to/logs/service-C.log"
+    start_position => "beginning"
+    sincedb_path => "/dev/null"
+    type => "service-C"
+  }
+  file {
+    path => "/path/to/logs/service-D.log"
+    start_position => "beginning"
+    sincedb_path => "/dev/null"
+    type => "service-D"
+  }
+}
+
+filter {
+  grok {
+    match => {
+      "message" => "%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:level} \[%{DATA:app},%{DATA:traceId},%{DATA:spanId}\] %{GREEDYDATA:msg}"
+    }
+  }
+  mutate {
+    add_field => { "service" => "%{type}" }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["http://localhost:9200"]
+    index => "spring-logs-%{+YYYY.MM.dd}"
+  }
+  stdout { codec => rubydebug }
+}
+
+
+
+🔍 Elasticsearch – Questions & Answers
+1. What is Elasticsearch?
+Answer:
+Elasticsearch is a distributed, RESTful search and analytics engine based on Apache Lucene. It's designed for horizontal scalability, real-time search, and high performance.
+
+2. What is an index in Elasticsearch?
+Answer:
+An index is like a database in relational systems. It holds a collection of documents with similar characteristics. Each index is made up of shards and replicas.
+
+
+3. What is a document and mapping in Elasticsearch?
+Answer:
+
+A document is a JSON object stored in an index (like a row in a table).
+
+A mapping defines how fields in the document are indexed and stored (like a schema).
+
+
+4. What are shards and replicas?
+Answer:
+
+Shards: Break the data into smaller pieces for scalability.
+
+Replicas: Copies of shards for fault tolerance and load balancing.
+
+5. How do you search logs in Elasticsearch?
+Answer:
+Using the REST API:
+curl -X GET "localhost:9200/logs/_search?q=level:ERROR"
+
+
+
+📥 Logstash – Questions & Answers
+6. What is Logstash?
+Answer:
+Logstash is a data collection pipeline tool that:
+
+Ingests data from various sources (files, TCP, syslog)
+
+Parses/transforms it (using filters like Grok)
+
+Sends it to outputs like Elasticsearch or Kafka
+
+7. What is the Logstash pipeline structure?
+Answer:
+input { ... }
+filter { ... }
+output { ... }
+
+Input: where logs come from
+
+Filter: how logs are parsed/processed
+
+Output: where logs are sent (Elasticsearch, stdout)
+8. What is Grok in Logstash?
+Answer:
+Grok is a powerful pattern-matching syntax used to parse unstructured log data into structured fields.
+
+Example:
+grok {
+  match => { "message" => "%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:level} \[%{DATA:service}\] %{GREEDYDATA:msg}" }
+}
+
+9. What is sincedb in Logstash?
+Answer:
+sincedb stores the position of the last read line in a file, so Logstash doesn’t re-read the entire file on restart. Set sincedb_path => "/dev/null" to disable it.
+
+📊 Kibana – Questions & Answers
+10. What is Kibana?
+Answer:
+Kibana is a UI tool for visualizing data stored in Elasticsearch. It provides dashboards, search interfaces, time series visualizations, and log analysis.
+
+11. How do you create a dashboard in Kibana?
+Answer:
+
+Go to Discover → Save your query.
+
+Go to Visualize → Create visual components.
+
+Go to Dashboard → Add saved visualizations.
+
+Save and share the dashboard.
+
+12. Can you filter logs by fields like traceId or service in Kibana?
+Answer:
+Yes, provided those fields are structured (not just part of a message string). You can use field-based filters or Lucene query syntax.
+
+🛠️ Practical/Scenario Questions
+13. How would you handle logs from multiple microservices?
+Answer:
+
+Set up centralized logging using ELK.
+
+Each service logs to a file or TCP.
+
+Logstash ingests logs with tags (type or service field).
+
+Use grok or JSON filters to structure logs.
+
+Visualize in Kibana with filters by service, traceId, etc.
+
+14. What are performance best practices for ELK?
+Answer:
+
+Use structured logging (JSON)
+
+Tune Elasticsearch heap size (50% of system RAM, max ~32GB)
+
+Set up index lifecycle policies (ILM) to rotate/delete old logs
+
+Use multiple pipelines in Logstash for high throughput
+
+Avoid regex-heavy Grok filters when possible
+
+15. What alternatives to Logstash exist?
+Answer:
+
+Filebeat (lightweight agent from Elastic)
+
+Fluentd / Fluent Bit
+
+Kafka (as a buffer between apps and Logstash)
+
+
+
+| Scenario                                           | Best Fit                     |
+| -------------------------------------------------- | ---------------------------- |
+| Want open-source and flexible stack                | ELK                          |
+| Large enterprise with big budget and support needs | Splunk                       |
+| Need to customize log pipeline deeply              | ELK                          |
+| Need out-of-the-box support, enterprise SLA        | Splunk                       |
+| Prefer cloud-managed log solution                  | Splunk Cloud / Elastic Cloud |
+
+
+| Feature          | **ELK Stack**                           |        **Splunk**                               |
+| ---------------- | --------------------------------------- | ------------------------------------------------ |
+| Components       | Elasticsearch, Logstash, Kibana         | Splunk Universal Forwarder, Indexer, Search Head |
+| Type             | Open-source stack                       | Commercial, proprietary tool                     |
+| Cost             | Free to start (self-managed)            | Paid license (based on volume of data)           |
+| Setup Complexity | Moderate to high (needs config, tuning) | Easier out of the box but needs Splunk infra     |
+| UI               | Kibana                                  | Splunk Web                                       |
+| Scalability      | High (with proper cluster setup)        | High (Enterprise-ready, cloud available)         |
+| Data Ingestion   | Logstash, Beats, Fluentd, etc.          | Splunk Forwarder                                 |
+| Extensibility    | Many community plugins, customizable    | Proprietary apps and plugins via Splunkbase      |
+
+

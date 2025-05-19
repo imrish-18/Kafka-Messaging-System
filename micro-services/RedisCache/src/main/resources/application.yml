@@ -1,58 +1,61 @@
-spring:
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/users
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      group-id: user-service
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-  zipkin:
-    base-url: http://127.0.0.1:9411
-    enabled: true
-  tracing:
-    sampling:
-      probability: 1.0  # 100% sampling for demo
-
-logging:
-  level:
-    io.micrometer.tracing: INFO
-    io.zipkin.reporter2: INFO
-  pattern:
-    level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
-
-
-redisson:
-  config: |
-    singleServerConfig:
-      address: "redis://127.0.0.1:6379"
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-  instance:
-    prefer-ip-address: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    prometheus:
-      enabled: true
-    web:
-      exposure:
-        include: "*"
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-  tracing:
-    enabled: true
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/users
+#  kafka:
+#    bootstrap-servers: localhost:9092
+#    consumer:
+#      group-id: user-service
+#      auto-offset-reset: earliest
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#    producer:
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#  zipkin:
+#    base-url: http://127.0.0.1:9411
+#    enabled: true
+#  tracing:
+#    sampling:
+#      probability: 1.0  # 100% sampling for demo
+#
+#logging:
+#  level:
+#    io.micrometer.tracing: INFO
+#    io.zipkin.reporter2: INFO
+#  pattern:
+#    level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
+#  file:
+#    name: /Users/rishabhsharma/Desktop/Kafka-Messaging-System/micro-services/RedisCache/logs/elk.log
+#
+#
+#
+#redisson:
+#  config: |
+#    singleServerConfig:
+#      address: "redis://127.0.0.1:6379"
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+#  instance:
+#    prefer-ip-address: true
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    prometheus:
+#      enabled: true
+#    web:
+#      exposure:
+#        include: "*"
+#  metrics:
+#    export:
+#      prometheus:
+#        enabled: true
+#  tracing:
+#    enabled: true
